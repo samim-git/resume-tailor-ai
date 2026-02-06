@@ -39,6 +39,11 @@ class ProjectItem(BaseModel):
     link: Optional[str] = None
 
 
+class SkillCategory(BaseModel):
+    category: Optional[str] = None
+    skills: List[str] = Field(default_factory=list)
+
+
 class ResumeStructured(BaseModel):
     name: Optional[str] = None
     title: Optional[str] = None
@@ -50,4 +55,4 @@ class ResumeStructured(BaseModel):
     experience: List[ExperienceItem] = Field(default_factory=list)
     projects: List[ProjectItem] = Field(default_factory=list)
 
-    skills: List[str] = Field(default_factory=list)
+    skills: List[SkillCategory] = Field(default_factory=list)

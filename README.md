@@ -107,7 +107,7 @@ python -m pip install --upgrade pip
 ```bash
 pip install fastapi "uvicorn[standard]" python-dotenv pydantic \
   langchain langgraph openai langchain-openai \
-  pypdf python-docx reportlab \
+  pypdf python-docx reportlab beanie \
   sqlalchemy "psycopg[binary]" pgvector alembic
 ```
 
@@ -121,6 +121,10 @@ OPENAI_CHAT_MODEL=gpt-4.1-mini
 
 # Local dev folder for PDFs (only reads PDFs from here)
 BASE_RESUME_DIR=./data/resumes
+
+# MongoDB (resume-ai database)
+MONGODB_URI=mongodb://admin:your_password@localhost:27017
+MONGODB_DB_NAME=resume-ai
 
 # Optional DB (later)
 DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/resume_tailor
