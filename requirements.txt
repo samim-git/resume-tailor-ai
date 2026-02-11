@@ -12,3 +12,4 @@ reportlab
 beanie
 python-jose
 passlib[bcrypt]
+playwright

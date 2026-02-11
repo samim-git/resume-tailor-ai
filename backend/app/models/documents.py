@@ -9,6 +9,7 @@ from beanie import Document, Indexed, Update, before_event, Insert, Replace
 from pydantic import Field
 
 from .schemas_resume import ResumeStructured
+from .schemas_template import ResumeTemplateSchema, TemplateBlock, TemplateTheme
 
 
 def _utcnow() -> datetime:
@@ -76,3 +77,43 @@ class TailoredResume(TimestampedDocument):
 
     class Settings:
         name = "tailored_resume"
+
+
+class TailoredCoverLetter(TimestampedDocument):
+    """Tailored cover letter document. Saved when generating a cover letter for a job."""
+
+    title: str
+    job_title: str
+    job_description: str
+    tailored_content: str
+    user_id: str
+    ai_template_message: Optional[str] = None
+
+    class Settings:
+        name = "tailored_cover_letter"
+
+
+class ResumeTemplate(TimestampedDocument):
+    """Resume template definition. Collection: resume_template."""
+
+    name: str = Field(default="Default")
+    version: int = Field(default=1, ge=1)
+    is_default: bool = Field(default=False)
+
+    theme: TemplateTheme = Field(default_factory=TemplateTheme)
+    blocks: list[TemplateBlock] = Field(default_factory=list)
+
+    class Settings:
+        name = "resume_template"
+
+
+class BuiltResume(TimestampedDocument):
+    """User-built resume draft. Collection: built_resumes."""
+
+    user_id: str
+    title: str = Field(default="Untitled")
+    resume: ResumeStructured
+    template_id: Optional[str] = Field(default=None, description="Selected resume template id for this built resume")
+
+    class Settings:
+        name = "built_resumes"

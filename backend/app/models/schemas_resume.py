@@ -37,6 +37,8 @@ class ProjectItem(BaseModel):
     description: Optional[str] = None
     technologies: List[str] = Field(default_factory=list)
     link: Optional[str] = None
+    github: Optional[str] = Field(default=None, description="GitHub URL for the project")
+    demo: Optional[str] = Field(default=None, description="Demo/live URL for the project")
 
 
 class SkillCategory(BaseModel):

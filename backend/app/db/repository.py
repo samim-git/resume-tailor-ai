@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Optional
 
-from ..models.documents import CoverLetter, Resume, TailoredResume, User
+from ..models.documents import CoverLetter, Resume, ResumeTemplate, TailoredCoverLetter, TailoredResume, User
 from ..models.schemas_resume import ResumeStructured as ResumeSchema
+from ..models.schemas_template import TemplateBlock, TemplateTheme
 
 
 async def save_user_prof(user_id: str, prof: ResumeSchema) -> str:
@@ -64,6 +65,49 @@ async def get_user_by_username(username: str) -> Optional[User]:
     return await User.find_one(User.username == username)
 
 
+def _default_template_blocks() -> list[TemplateBlock]:
+    # Mirror the current ResumePreview structure/order.
+    return [
+        TemplateBlock(type="header"),
+        TemplateBlock(type="summary"),
+        TemplateBlock(type="skills"),
+        TemplateBlock(type="experience"),
+        TemplateBlock(type="education"),
+        TemplateBlock(type="projects"),
+    ]
+
+
+async def ensure_default_resume_template() -> ResumeTemplate:
+    """
+    Ensure there's a default resume template in DB.
+    Returns the default template.
+    """
+    existing = await ResumeTemplate.find_one(ResumeTemplate.is_default == True)  # noqa: E712
+    if existing:
+        return existing
+
+    tpl = ResumeTemplate(
+        name="Default (ResumePreview)",
+        version=1,
+        is_default=True,
+        theme=TemplateTheme(),
+        blocks=_default_template_blocks(),
+    )
+    await tpl.insert()
+    return tpl
+
+
+async def get_resume_template_by_id(template_id: str) -> Optional[ResumeTemplate]:
+    return await ResumeTemplate.get(template_id)
+
+
+async def get_default_resume_template() -> ResumeTemplate:
+    tpl = await ResumeTemplate.find_one(ResumeTemplate.is_default == True)  # noqa: E712
+    if tpl:
+        return tpl
+    return await ensure_default_resume_template()
+
+
 async def add_resume(
     title: str,
     file_link: str,
@@ -96,3 +140,30 @@ async def add_cover_letter(
     )
     await cover.insert()
     return str(cover.id)
+
+
+async def save_tailored_cover_letter(
+    user_id: str,
+    title: str,
+    job_title: str,
+    job_description: str,
+    tailored_content: str,
+    ai_template_message: Optional[str] = None,
+) -> str:
+    """Save a tailored cover letter for a job. Returns tailored_cover_letter id."""
+    doc = TailoredCoverLetter(
+        title=title,
+        job_title=job_title,
+        job_description=job_description,
+        tailored_content=tailored_content,
+        user_id=user_id,
+        ai_template_message=ai_template_message,
+    )
+    await doc.insert()
+    return str(doc.id)
+
+
+async def list_tailored_cover_letters(user_id: str) -> list[TailoredCoverLetter]:
+    """List tailored cover letters for a user, newest first."""
+    cursor = TailoredCoverLetter.find(TailoredCoverLetter.user_id == user_id).sort(-TailoredCoverLetter.updated_at)
+    return await cursor.to_list()

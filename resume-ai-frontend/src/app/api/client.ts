@@ -1,7 +1,8 @@
 import { getAccessToken } from '../../shared/auth/tokenStore'
 
 export function getApiBaseUrl() {
-  return import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
+  const raw = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000') as string
+  return raw.replace(/\/+$/, '')
 }
 
 type ApiFetchOptions = Omit<RequestInit, 'headers'> & {

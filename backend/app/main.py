@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .db.mongodb import lifespan_client
 from .routers.auth import router as auth_router
+from .routers.cover_letter import router as cover_letter_router
 from .routers.resume import router as resume_router
 from .routers.user import router as user_router
 
@@ -28,6 +29,7 @@ app = FastAPI(
         {"name": "health", "description": "Service health checks."},
         {"name": "users", "description": "User creation and management."},
         {"name": "resume", "description": "Resume extraction, tailoring, and export."},
+        {"name": "cover-letter", "description": "Cover letter tailoring."},
     ],
 )
 
@@ -41,6 +43,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Content-Disposition"],
 )
 
 
@@ -52,3 +55,4 @@ def health():
 app.include_router(auth_router)
 app.include_router(user_router)
 app.include_router(resume_router)
+app.include_router(cover_letter_router)

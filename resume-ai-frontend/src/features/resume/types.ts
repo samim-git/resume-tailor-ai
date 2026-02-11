@@ -31,6 +31,8 @@ export type ProjectItem = {
   description?: string | null
   technologies: string[]
   link?: string | null
+  github?: string | null
+  demo?: string | null
 }
 
 export type SkillCategory = {

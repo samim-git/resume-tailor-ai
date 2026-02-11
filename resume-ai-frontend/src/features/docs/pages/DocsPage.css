@@ -135,6 +135,162 @@
   font-weight: 800;
 }
 
+.dash__secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dash__select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 18, 32, 0.14);
+  background: #fff;
+  color: rgba(11, 18, 32, 0.85);
+  font-weight: 800;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 18, 32, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.modalCard {
+  width: min(760px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(11, 18, 32, 0.12);
+  background: #fff;
+  padding: 16px 16px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.modalTitle {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: rgba(11, 18, 32, 0.92);
+}
+
+.modalClose {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 18, 32, 0.14);
+  background: transparent;
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modalFieldFull {
+  grid-column: 1 / -1;
+}
+
+.modalField {
+  display: grid;
+  gap: 6px;
+}
+
+.modalLabel {
+  font-weight: 800;
+  color: rgba(11, 18, 32, 0.78);
+  font-size: 0.95rem;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 18, 32, 0.14);
+  background: #fff;
+  color: rgba(11, 18, 32, 0.9);
+  font-weight: 700;
+}
+
+.modalRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.modalCheck {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: rgba(11, 18, 32, 0.82);
+}
+
+.blockList {
+  border: 1px solid rgba(11, 18, 32, 0.12);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(11, 18, 32, 0.02);
+  display: grid;
+  gap: 8px;
+}
+
+.blockRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 18, 32, 0.08);
+  background: #fff;
+}
+
+.blockName {
+  font-weight: 900;
+  color: rgba(11, 18, 32, 0.9);
+  text-transform: capitalize;
+}
+
+.blockActions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.blockBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(11, 18, 32, 0.14);
+  background: transparent;
+  font-weight: 900;
+}
+
+.modalError {
+  margin-top: 10px;
+  color: rgba(180, 22, 22, 0.9);
+  font-weight: 800;
+}
+
+.modalFooter {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .dash__empty {
   border: 1px solid rgba(11, 18, 32, 0.12);
   border-radius: 16px;

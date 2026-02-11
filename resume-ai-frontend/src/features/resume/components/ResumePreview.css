@@ -1,82 +1,174 @@
 .rp {
   width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
   background: #fff;
-  border: 1px solid rgba(11, 18, 32, 0.12);
-  border-radius: 16px;
-  padding: 18px 18px;
+  border: 1px solid rgba(11, 18, 32, 0.14);
+  border-radius: 10px;
+  padding: 28px 34px;
+  box-shadow:
+    0 10px 30px rgba(11, 18, 32, 0.08),
+    0 1px 0 rgba(11, 18, 32, 0.04);
 }
 
 .rp__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(11, 18, 32, 0.08);
+  padding-bottom: 14px;
+  border-bottom: 0;
 }
 
-.rp__name {
-  margin: 0;
-  font-size: 1.6rem;
-  line-height: 1.1;
+.rp__headerBlock {
+  text-align: center;
+}
+
+.rp__headerMain {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  font-size: 20pt;
   color: rgba(11, 18, 32, 0.95);
 }
 
-.rp__title {
-  margin-top: 6px;
-  color: rgba(11, 18, 32, 0.7);
-  font-weight: 600;
+.rp__contact {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--rp-primary, #00bbf9);
+  font-size: 8.8pt;
+  font-weight: 800;
 }
 
-.rp__contact {
-  text-align: right;
-  color: rgba(11, 18, 32, 0.65);
-  font-size: 0.95rem;
-  max-width: 46ch;
+.rp__headerSub {
+  margin-top: -2px;
+  color: rgba(11, 18, 32, 0.78);
+  font-weight: 700;
+  font-size: 11pt;
+}
+
+.rp__contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rp__contactIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rp-primary, #00bbf9);
+}
+
+.rp__contactText {
+  color: rgba(11, 18, 32, 0.7);
+  font-weight: 700;
+}
+
+.rp__contactLink {
+  color: rgba(11, 18, 32, 0.7); /* same as normal contact text */
+  font-weight: 700;
+  text-decoration: underline; /* always look like a link */
+}
+
+.rp__contactSep {
+  margin: 0 10px;
+  color: rgba(11, 18, 32, 0.18);
+  font-weight: 800;
 }
 
 .rp__section {
-  margin-top: 14px;
+  margin-top: 1px;
 }
 
-.rp__h2 {
-  margin: 0 0 8px;
-  font-size: 1.05rem;
-  color: rgba(11, 18, 32, 0.92);
+.rp__sectionHead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0 10px;
 }
 
-.rp__p {
-  margin: 6px 0 0;
+.rp__sectionTitle {
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 12pt;
+  color: var(--rp-primary, #00bbf9);
+  padding: 0 12px;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.rp__sectionHead::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px dotted color-mix(in srgb, var(--rp-primary, #00bbf9) 85%, transparent);
+  transform: translateY(-50%);
+}
+
+.rp__text {
+  margin-top: 6px;
   color: rgba(11, 18, 32, 0.78);
+  line-height: 1.55;
+  font-size: 10pt;
 }
 
 .rp__stack {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .rp__item {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(11, 18, 32, 0.08);
-  background: rgba(11, 18, 32, 0.02);
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
 }
 
-.rp__itemTop {
+.rp__row {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  align-items: flex-start;
 }
 
-.rp__itemTitle {
+.rp__rowSub {
+  margin-top: 2px;
+}
+
+.rp__company,
+.rp__school {
   font-weight: 800;
   color: rgba(11, 18, 32, 0.9);
+  font-size: 12pt;
+}
+
+.rp__role,
+.rp__field {
+  font-weight: 700;
+  color: rgba(11, 18, 32, 0.82);
+  font-size: 10.5pt;
+}
+
+.rp__loc {
+  color: rgba(11, 18, 32, 0.68);
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 9.5pt;
 }
 
 .rp__dates {
   color: rgba(11, 18, 32, 0.6);
-  font-size: 0.92rem;
+  font-size: 9pt;
   white-space: nowrap;
+  font-weight: 600;
+}
+
+.rp__addr {
+  color: rgba(11, 18, 32, 0.68);
+  font-weight: 600;
+  white-space: nowrap;
+  margin-top: 4px;
+  font-size: 9.5pt;
 }
 
 .rp__muted {
@@ -84,45 +176,96 @@
   font-weight: 600;
 }
 
+.rp__projLinks {
+  margin-top: 6px;
+  font-size: 10pt;
+  font-weight: 700;
+}
+
+.rp__link {
+  color: var(--rp-primary, #00bbf9);
+  text-decoration: none;
+}
+
+.rp__link:hover {
+  text-decoration: underline;
+}
+
+.rp__linkSep {
+  color: rgba(11, 18, 32, 0.18);
+  font-weight: 800;
+}
+
 .rp__list {
   margin: 8px 0 0;
   padding-left: 18px;
   color: rgba(11, 18, 32, 0.78);
+  font-size: 10pt;
 }
 
-.rp__skills {
-  display: grid;
-  gap: 8px;
+.rp__listCont {
+  margin-top: 0;
 }
 
-.rp__skillRow {
+.rp__skillsBlock {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(11, 18, 32, 0.08);
-  background: rgba(11, 18, 32, 0.02);
+  gap: 6px;
+}
+
+.rp__skillLine {
+  color: rgba(11, 18, 32, 0.78);
+  line-height: 1.5;
 }
 
 .rp__skillCat {
   font-weight: 800;
   color: rgba(11, 18, 32, 0.9);
+  font-size: 10.5pt;
 }
 
-.rp__skillList {
+.rp__skillItems {
   color: rgba(11, 18, 32, 0.76);
+  font-size: 10pt;
+}
+
+.rpPages {
+  display: grid;
+  gap: 18px;
+}
+
+.rpPage {
+  height: 1123px; /* A4 @ 96dpi */
+  overflow: hidden;
+  padding-bottom: 75px; /* visible bottom margin like PDF */
+}
+
+.rpPageSeparator {
+  width: 100%;
+  max-width: 860px;
+  margin: 4px auto;
+  border-top: 2px dashed rgba(11, 18, 32, 0.2);
+}
+
+.rpMeasure {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  width: 920px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.rpMeasure .rp {
+  box-shadow: none;
 }
 
 @media (max-width: 720px) {
-  .rp__header {
-    flex-direction: column;
+  .rp {
+    padding: 22px 18px;
   }
-  .rp__contact {
-    text-align: left;
-  }
-  .rp__skillRow {
-    grid-template-columns: 1fr;
+  .rpPage {
+    height: auto; /* avoid awkward paging on very small screens */
+    overflow: visible;
   }
 }
 

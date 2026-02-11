@@ -9,7 +9,7 @@ from beanie import init_beanie
 from pymongo import AsyncMongoClient
 
 from ..config import MONGODB_DB_NAME, MONGODB_URI
-from ..models.documents import CoverLetter, Resume, TailoredResume, User
+from ..models.documents import BuiltResume, CoverLetter, Resume, ResumeTemplate, TailoredCoverLetter, TailoredResume, User
 
 _db_client: AsyncMongoClient | None = None
 
@@ -21,8 +21,12 @@ async def init_db() -> None:
     database = _db_client[MONGODB_DB_NAME]
     await init_beanie(
         database=database,
-        document_models=[User, Resume, CoverLetter, TailoredResume],
+        document_models=[User, Resume, CoverLetter, TailoredResume, TailoredCoverLetter, ResumeTemplate, BuiltResume],
     )
+    # Seed a default resume template if none exists.
+    from ..db.repository import ensure_default_resume_template
+
+    await ensure_default_resume_template()
 
 
 def get_db_client() -> AsyncMongoClient | None:
